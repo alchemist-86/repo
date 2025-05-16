@@ -1,4 +1,4 @@
--- 1
+-- Hira Amjad 22P-9168  Q-3-1
 create table salary_audit (
     audit_id      number primary key,
     employee_id   number,
@@ -6,8 +6,6 @@ create table salary_audit (
     new_salary    number(8,2),
     change_date   date
 );
-
-
 
 create or replace trigger trigger_salary
 after update of salary on employees
@@ -21,7 +19,12 @@ end;
 /
 
 
--- 2
+
+
+
+
+
+-- Hira Amjad 22P-9168  Q-3-2
 create or replace trigger trigger_uppercase
 before insert or update of department_name on departments
 for each row
@@ -33,7 +36,12 @@ end;
 /
 
 
--- 3
+
+
+
+
+
+-- Hira Amjad 22P-9168  Q-3-3
 create or replace trigger trigger_inserts
 before insert on departments
 for each row
