@@ -23,6 +23,7 @@ end;
 
 -- B
 
+
 create or replace package emp_pkg is
   type emp_rec is record (
     ename varchar2(100),
@@ -38,6 +39,7 @@ end;
 create or replace function get_emp_perf
 return emp_pkg.emp_tab pipelined
 as
+  rec emp_pkg.emp_rec;
 begin
   for r in (
     select
@@ -54,11 +56,18 @@ begin
     left join employees m on e.manager_id = m.employee_id
     join jobs j on e.job_id = j.job_id
   ) loop
-    pipe row(emp_pkg.emp_rec(r.ename, r.mname, r.job, r.ysal, r.perf));
+    rec.ename := r.ename;
+    rec.mname := r.mname;
+    rec.job   := r.job;
+    rec.ysal  := r.ysal;
+    rec.perf  := r.perf;
+
+    pipe row(rec);
   end loop;
 
   return;
 end;
 /
+
 
 select * from table(get_emp_perf());
