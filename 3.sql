@@ -10,7 +10,7 @@ create table salary_audit (
 
 
 create or replace trigger trigger_salary
-after update of salary on employee
+after update of salary on employees
 for each row
 begin
     if :old.salary != :new.salary then
